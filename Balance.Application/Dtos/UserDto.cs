@@ -20,11 +20,5 @@ namespace Balance.Application.Dtos
 
         [Required]
         public string Lastname { get; set; }
-
-        [Required]
-        public string Device { get; set; }
-
-        [Required]
-        public string IPAddress { get; set; }
     }
 }

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Balance.Infrastracture", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Balance.Api", "Balance.Api\Balance.Api.csproj", "{8765C186-51AB-4B4A-ADDB-8048DFCA2D6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Balance.UI", "Balance.UI\Balance.UI.csproj", "{BC427116-4A39-483B-84BF-05D380A023BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8765C186-51AB-4B4A-ADDB-8048DFCA2D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8765C186-51AB-4B4A-ADDB-8048DFCA2D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8765C186-51AB-4B4A-ADDB-8048DFCA2D6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC427116-4A39-483B-84BF-05D380A023BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC427116-4A39-483B-84BF-05D380A023BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC427116-4A39-483B-84BF-05D380A023BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC427116-4A39-483B-84BF-05D380A023BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

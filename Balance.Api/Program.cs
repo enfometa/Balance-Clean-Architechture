@@ -19,6 +19,14 @@ builder.Services.AddJWTAuthenticationService(tokenSecurityKey);
 
 builder.Services.AddControllers();
 
+// Add CORS
+builder.Services.AddCors(o => o.AddPolicy("CORSPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -37,5 +45,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("CORSPolicy");
 
 app.Run();

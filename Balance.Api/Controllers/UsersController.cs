@@ -43,7 +43,7 @@ namespace Balance.Api.Controllers
 
         [HttpPost("Authenticate")]
         [ServiceFilter(typeof(RequestLoggerFilterAttribute))]
-        public async Task<ActionResult<bool>> Authenticate(UserCredentialsDto userCredentialsDto)
+        public async Task<ActionResult<AuthTokenDto>> Authenticate(UserCredentialsDto userCredentialsDto)
         {
             AuthTokenDto token = null;
             try
@@ -65,7 +65,7 @@ namespace Balance.Api.Controllers
 
         [HttpGet("auth/balance")]
         [Authorize]
-        public async Task<ActionResult<bool>> Balance()
+        public async Task<ActionResult<decimal>> Balance()
         {
             var user = await _userService.GetUser(UserId);
 
