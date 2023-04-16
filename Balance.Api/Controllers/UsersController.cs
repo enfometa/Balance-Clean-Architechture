@@ -17,7 +17,7 @@ namespace Balance.Api.Controllers
         }
 
         [HttpPost("Signup")]
-        public async Task<ActionResult<bool>> CreateRide(UserDto userDto) 
+        public async Task<ActionResult<bool>> Signup(UserDto userDto) 
         {
             try
             {

@@ -15,5 +15,6 @@ namespace Balance.Core.Entities
         public string Lastname { get; set; }
         public string Device { get; set; }
         public string IPAddress { get; set; }
+        public decimal Balance { get; set; }
     }
 }

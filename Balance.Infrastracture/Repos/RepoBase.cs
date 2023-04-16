@@ -13,7 +13,7 @@ namespace Balance.Infrastracture.Repos
 {
     public class RepoBase<T> : IRepoBase<T> where T : EntityBase
     {
-        private readonly IDbConnection _dbConnection;
+        protected readonly IDbConnection _dbConnection;
 
         public RepoBase(IDbConnection dbConnection)
         {

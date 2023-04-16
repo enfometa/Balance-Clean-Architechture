@@ -1,5 +1,6 @@
 ﻿using Balance.Application.Services;
 using Balance.Core.Interfaces.Repos;
+using Balance.Infrastracture.Repos;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic;
@@ -38,6 +39,8 @@ namespace Balance.Api.DI
             });
 
             _services.AddScoped<IUserService, UserService>();
+            _services.AddScoped<IUserRepo, UserRepo>();
+            _services.AddSingleton<ICryptoService, CryptoService>();
         }
 
     }

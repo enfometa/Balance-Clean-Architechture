@@ -1,4 +1,5 @@
 using Balance.Api.DI;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,9 +14,16 @@ dIRegister.RegisterDependencies();
 
 builder.Services.AddControllers();
 
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
