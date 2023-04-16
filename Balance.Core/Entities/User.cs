@@ -13,8 +13,6 @@ namespace Balance.Core.Entities
         public string PasswordSalt { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Device { get; set; }
-        public string IPAddress { get; set; }
         public decimal Balance { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Balance.Application.Dtos;
 using Balance.Application.Services;
+using Balance.Core.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,7 @@ namespace Balance.Api.Controllers
             {
                 await _userService.RegisterAsync(userDto);
             }
-            catch (Exception ex)
+            catch (UserAlreadyExistsException ex)
             {
                 return BadRequest(ex.Message);
             }

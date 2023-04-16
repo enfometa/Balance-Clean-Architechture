@@ -8,7 +8,7 @@ namespace Balance.Api.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>().ReverseMap();
         }
     }
 }

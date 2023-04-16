@@ -26,7 +26,7 @@ namespace Balance.Api.DI
         public void RegisterDependencies()
         {
 
-            string connString = _builder.Configuration.GetConnectionString("DefaultConnectionString");
+            string connString = _builder.Configuration.GetConnectionString("DefaultConnection");
 
             _services.AddScoped<IDbConnection, SqlConnection>(sp =>
             {

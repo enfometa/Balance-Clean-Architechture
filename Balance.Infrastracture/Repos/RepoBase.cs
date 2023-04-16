@@ -21,26 +21,26 @@ namespace Balance.Infrastracture.Repos
         }
         public virtual Task<int> DeleteAsync(int id)
         {
-            string sql = $"delete from {GetTableName(typeof(T))} where id = @id";
+            string sql = $"delete from [{GetTableName(typeof(T))}] where id = @id";
 
             return _dbConnection.ExecuteAsync(sql, new { id = id });
         }
 
         public virtual Task<IEnumerable<T>> GetAllAsync()
         {
-            string sql = $"select * from {GetTableName(typeof(T))}";
+            string sql = $"select * from [{GetTableName(typeof(T))}]";
             return _dbConnection.QueryAsync<T>(sql);
         }
 
         public virtual Task<T> GetByIdAsync(int id)
         {
-            string sql = $"select * from {GetTableName(typeof(T))} where id = @id";
+            string sql = $"select * from [{GetTableName(typeof(T))}] where id = @id";
             return _dbConnection.QueryFirstOrDefaultAsync<T>(sql, new { id = id });
         }
 
         public virtual Task<int> InsertAsync(T obj)
         {
-            string sql = $"insert into {GetTableName(typeof(T))} ({GetCsvProps(typeof(T))}) values({GetCsvPropsParams(typeof(T))})";
+            string sql = $"insert into [{GetTableName(typeof(T))}] ({GetCsvProps(typeof(T), true)}) values({GetCsvPropsParams(typeof(T), true)})";
 
             return _dbConnection.ExecuteAsync(sql, obj);
         }
@@ -56,14 +56,14 @@ namespace Balance.Infrastracture.Repos
         {
             return t.Name;
         }
-        private static string GetCsvProps(Type t)
+        private static string GetCsvProps(Type t, bool excludeId)
         {
-            var props = t.GetProperties();
+            var props = t.GetProperties().Where(p => !excludeId || p.Name != "Id");
             return string.Join(",", props.Select(x => x.Name));
         }
-        private static string GetCsvPropsParams(Type t)
+        private static string GetCsvPropsParams(Type t, bool excludeId)
         {
-            var props = t.GetProperties();
+            var props = t.GetProperties().Where(p => !excludeId || p.Name != "Id"); ;
             return string.Join(",", props.Select(x => "@" + x.Name));
         }
         #endregion

@@ -1,5 +1,6 @@
 ﻿using Balance.Core.Entities;
 using Balance.Core.Interfaces.Repos;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,9 +16,10 @@ namespace Balance.Infrastracture.Repos
         {
 
         }
-        public Task<User> GetByUsernameAsync(string username)
+        public async Task<User> GetByUsernameAsync(string username)
         {
-            throw new NotImplementedException();
+            string sql = "select * from [user] where username = @username";
+            return _dbConnection.QueryFirstOrDefault<User>(sql, new { username });
         }
     }
 }
