@@ -1,4 +1,5 @@
-﻿using Balance.Api.Helpers;
+﻿using Balance.Api.Attributes;
+using Balance.Api.Helpers;
 using Balance.Application.Dtos;
 using Balance.Application.Services;
 using Balance.Core.Exceptions;
@@ -24,6 +25,7 @@ namespace Balance.Api.Controllers
         }
 
         [HttpPost("Signup")]
+        [ServiceFilter(typeof(RequestLoggerFilterAttribute))]
         public async Task<ActionResult<bool>> Signup(UserDto userDto) 
         {
             try
@@ -40,6 +42,7 @@ namespace Balance.Api.Controllers
         }
 
         [HttpPost("Authenticate")]
+        [ServiceFilter(typeof(RequestLoggerFilterAttribute))]
         public async Task<ActionResult<bool>> Authenticate(UserCredentialsDto userCredentialsDto)
         {
             AuthTokenDto token = null;

@@ -1,4 +1,5 @@
-﻿using Balance.Application.Services;
+﻿using Balance.Api.Attributes;
+using Balance.Application.Services;
 using Balance.Core.Interfaces.Repos;
 using Balance.Infrastracture.Repos;
 using Microsoft.AspNetCore.Authentication;
@@ -41,6 +42,9 @@ namespace Balance.Api.DI
             _services.AddScoped<IUserService, UserService>();
             _services.AddScoped<IUserRepo, UserRepo>();
             _services.AddSingleton<ICryptoService, CryptoService>();
+            _services.AddScoped<IRequestLogRepo, RequestLogRepo>();
+            _services.AddScoped<IRequestLogService, RequestLogService>();
+            _services.AddScoped<RequestLoggerFilterAttribute>();
         }
 
     }
