@@ -67,9 +67,15 @@ namespace Balance.Application.Services
             var user = _mapper.Map<User>(userDto);
             user.Password = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.Balance = 5;
 
             await _userRepo.InsertAsync(user);
             return user;
+        }
+
+        public async Task<User> GetUser(int id)
+        {
+            return await _userRepo.GetByIdAsync(id);
         }
     }
 }

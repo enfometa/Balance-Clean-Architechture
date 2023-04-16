@@ -1,6 +1,8 @@
-﻿using Balance.Application.Dtos;
+﻿using Balance.Api.Helpers;
+using Balance.Application.Dtos;
 using Balance.Application.Services;
 using Balance.Core.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +14,8 @@ namespace Balance.Api.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthService _authService;
+
+        public int UserId { get { return (int)UserAuthHelper.GetUserId(HttpContext); } }
 
         public UsersController(IUserService userService, IAuthService authService)
         {
@@ -54,6 +58,16 @@ namespace Balance.Api.Controllers
 
 
             return Ok(token);
+        }
+
+        [HttpGet("auth/balance")]
+        [Authorize]
+        public async Task<ActionResult<bool>> Balance()
+        {
+            var user = await _userService.GetUser(UserId);
+
+
+            return Ok(new { user.Balance });
         }
     }
 }

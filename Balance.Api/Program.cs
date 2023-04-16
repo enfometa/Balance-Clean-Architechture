@@ -1,4 +1,5 @@
 using Balance.Api.DI;
+using Balance.Api.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
@@ -11,6 +12,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //Register app dependencies like db context, repos, services
 DIRegister dIRegister = new DIRegister(builder, configuration);
 dIRegister.RegisterDependencies();
+
+//Add JWT authentication service
+string tokenSecurityKey = configuration.GetValue<string>("SecurityKeys:AuthTokenSecurityKey");
+builder.Services.AddJWTAuthenticationService(tokenSecurityKey);
 
 builder.Services.AddControllers();
 
@@ -26,6 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

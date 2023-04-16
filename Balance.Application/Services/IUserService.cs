@@ -12,5 +12,6 @@ namespace Balance.Application.Services
     {
         Task<User> RegisterAsync(UserDto userDto);
         Task<User> AuthenticateAsync(string username, string password);
+        Task<User> GetUser(int id);
     }
 }
