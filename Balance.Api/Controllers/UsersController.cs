@@ -16,6 +16,7 @@ namespace Balance.Api.Controllers
         private readonly IUserService _userService;
         private readonly IAuthService _authService;
 
+        // this User id is extracted from the token claims
         public int UserId { get { return (int)UserAuthHelper.GetUserId(HttpContext); } }
 
         public UsersController(IUserService userService, IAuthService authService)
@@ -32,7 +33,7 @@ namespace Balance.Api.Controllers
             {
                 await _userService.RegisterAsync(userDto);
             }
-            catch (UserAlreadyExistsException ex)
+            catch (UserAlreadyExistsException ex) //if user already exists return bad response
             {
                 return BadRequest(ex.Message);
             }
@@ -49,12 +50,12 @@ namespace Balance.Api.Controllers
             try
             {
                 var user = await _userService.AuthenticateAsync(userCredentialsDto.Username, userCredentialsDto.Password);
-                if (user != null)
+                if (user != null) //if user credentials are correct, create token
                 {
                     token = await _authService.GetToken(user);
                 }
             }
-            catch (InvalidCredentailsException ex)
+            catch (InvalidCredentailsException ex) // invalid credentials return bad response
             {
                 return BadRequest(ex.Message);
             }
@@ -68,8 +69,6 @@ namespace Balance.Api.Controllers
         public async Task<ActionResult<decimal>> Balance()
         {
             var user = await _userService.GetUser(UserId);
-
-
             return Ok(new { user.Balance });
         }
     }

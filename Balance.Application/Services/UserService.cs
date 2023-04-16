@@ -58,10 +58,14 @@ namespace Balance.Application.Services
         public async Task<User> RegisterAsync(UserDto userDto)
         {
             var usr = await _userRepo.GetByUsernameAsync(userDto.Username);
+
+            //if user found with the requested username
             if (usr != null)
             {
                 throw new UserAlreadyExistsException();
             }
+
+            //Calculate password hash and salt
             (var passwordHash, var passwordSalt) = _cryptoService.HashPassword(userDto.Password);
 
             var user = _mapper.Map<User>(userDto);
