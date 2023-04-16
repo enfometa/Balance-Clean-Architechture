@@ -11,10 +11,12 @@ namespace Balance.Api.Controllers
     public class UsersController : AppBaseController
     {
         private readonly IUserService _userService;
+        private readonly IAuthService _authService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IAuthService authService)
         {
             _userService = userService;
+            _authService = authService;
         }
 
         [HttpPost("Signup")]
@@ -31,6 +33,27 @@ namespace Balance.Api.Controllers
             
 
             return Ok(true);
+        }
+
+        [HttpPost("Authenticate")]
+        public async Task<ActionResult<bool>> Authenticate(UserCredentialsDto userCredentialsDto)
+        {
+            AuthTokenDto token = null;
+            try
+            {
+                var user = await _userService.AuthenticateAsync(userCredentialsDto.Username, userCredentialsDto.Password);
+                if (user != null)
+                {
+                    token = await _authService.GetToken(user);
+                }
+            }
+            catch (InvalidCredentailsException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+
+            return Ok(token);
         }
     }
 }
